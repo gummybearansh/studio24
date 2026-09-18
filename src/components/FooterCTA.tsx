@@ -182,10 +182,10 @@ export default function FooterCTA() {
 
               <button
                 type="submit"
-                className="group mt-auto inline-flex items-center gap-3 self-start rounded-full bg-[#1C1A17] py-2 pl-6 pr-2 text-sm font-bold text-[#FAF6EF] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#2F4A3C] active:scale-[0.98]"
+                className="group mt-auto inline-flex cursor-pointer items-center gap-3 self-start rounded-full bg-[#1C1A17] py-2 pl-6 pr-2 text-sm font-bold text-[#FAF6EF] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#2F4A3C] hover:shadow-[0_16px_40px_-16px_rgba(47,74,60,0.7)] active:scale-[0.98]"
               >
                 Send inquiry
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1 group-hover:scale-105">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 text-[#FAF6EF] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:translate-x-1.5 group-hover:bg-[#FAF6EF] group-hover:text-[#1C1A17]">
                   →
                 </span>
               </button>

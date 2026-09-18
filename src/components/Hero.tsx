@@ -52,8 +52,8 @@ export default function Hero() {
         >
           <source src="/hero-video-light.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(250,246,239,0.35)_0%,rgba(250,246,239,0.78)_62%,rgba(250,246,239,0.96)_100%)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6EF]/70 via-transparent to-[#FAF6EF]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(250,246,239,0.55)_0%,rgba(250,246,239,0.85)_62%,rgba(250,246,239,0.97)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF6EF]/75 via-transparent to-[#FAF6EF]" />
       </div>
 
       <div className="grain absolute inset-0" />
@@ -65,12 +65,16 @@ export default function Hero() {
         </p>
 
         <h1
-          className="font-clash hero-title mx-auto w-full max-w-6xl font-semibold tracking-[-0.045em] leading-[0.98] text-[#1C1A17]"
-          style={{ fontSize: "clamp(3.4rem, 8vw, 7.5rem)" }}
+          className="font-clash hero-title mx-auto w-full max-w-6xl font-semibold tracking-[-0.05em] leading-[0.96] text-[#1C1A17]"
+          style={{ fontSize: "clamp(3.6rem, 9vw, 8.5rem)" }}
         >
           <span className="hero-line block">Landing pages</span>
-          <span className="hero-line block">
-            that <span className="italic text-[#2F4A3C]">convert.</span>
+          <span className="hero-line block pb-3">
+            that{" "}
+            <span className="relative inline-block italic text-[#2F4A3C]">
+              convert.
+              <span aria-hidden className="absolute -bottom-1 left-0 h-[0.09em] w-full rounded-full bg-[#2F4A3C]" />
+            </span>
           </span>
         </h1>
 
