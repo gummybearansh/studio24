@@ -1,26 +1,208 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-paper: #faf6ef;
+  --color-cream: #fffdf8;
+  --color-ink: #1c1a17;
+  --color-muted: #6b655c;
+  --color-moss: #2f4a3c;
+  --color-clay: #c2703e;
+  --color-sage: #dde7d8;
+  --color-blush: #f3dfd2;
+  --color-butter: #f4ead3;
+  --color-mist: #dde6f0;
+  --color-lilac: #e4e0f1;
+  --font-display: var(--font-display);
+  --font-clash: "Clash Display", "Outfit", ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.font-clash {
+  font-family: var(--font-clash);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #faf6ef;
+  color: #1c1a17;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #2f4a3c;
+  color: #faf6ef;
+}
+
+/* Infinite marquee */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-x 28s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee-x 46s linear infinite;
+}
+
+/* Paper grain overlay — subtle physical feel */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Dual-tone hover reveal — muted pastel base, full color on hover */
+.dual-tone {
+  --mx: 50%;
+  --my: 50%;
+}
+
+.dual-tone-base {
+  filter: grayscale(1) contrast(1.04) brightness(0.86);
+}
+
+.dual-tone-top {
+  filter: saturate(1.12) contrast(1.05);
+  clip-path: circle(0px at var(--mx) var(--my));
+  opacity: 0;
+  transition: opacity 0.45s ease, clip-path 0.12s linear;
+}
+
+.dual-tone:hover .dual-tone-top,
+.dual-tone.is-active .dual-tone-top {
+  opacity: 1;
+  clip-path: circle(220px at var(--mx) var(--my));
+}
+
+@media (hover: none) {
+  .dual-tone-top {
+    clip-path: none;
+  }
+  .dual-tone.is-active .dual-tone-top {
+    clip-path: none;
+  }
+}
+
+/* Scrub text words */
+.scrub-word {
+  opacity: 0.12;
+}
+
+/* Ambient aurora drift (transform + opacity only) */
+@keyframes aurora-a {
+  from {
+    transform: translate3d(-12%, -6%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(12%, 8%, 0) scale(1.15);
+  }
+}
+
+@keyframes aurora-b {
+  from {
+    transform: translate3d(10%, 10%, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(-10%, -8%, 0) scale(0.95);
+  }
+}
+
+.animate-aurora-a {
+  animation: aurora-a 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-aurora-b {
+  animation: aurora-b 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Hero collage motion (transform + opacity only) */
+@keyframes kb-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-4deg);
+  }
+}
+
+@keyframes fade-swap {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kenburns {
+  animation: kb-zoom 8s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.fade-swap {
+  animation: fade-swap 0.55s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenburns,
+  .float-soft,
+  .fade-swap,
+  .animate-marquee,
+  .animate-aurora-a,
+  .animate-aurora-b {
+    animation: none;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Scale down inline-clamped display type without touching desktop */
+  .hero-title {
+    font-size: clamp(2.35rem, 10.5vw, 3.4rem) !important;
+    line-height: 1.08 !important;
+    overflow-wrap: break-word;
+  }
+  img, video { max-width: 100%; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #faf6ef;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d2c4;
+  border-radius: 8px;
 }
