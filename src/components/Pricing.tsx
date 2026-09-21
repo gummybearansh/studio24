@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { track } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,6 +89,7 @@ export default function Pricing() {
                   href="https://cal.com/ansh-lachhwani"
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => track("cal_book_click", { location: "pricing", cta: o.cta })}
                   className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-[#1C1A17] py-2 pl-6 pr-2 text-sm font-bold text-[#FAF6EF] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#2F4A3C] active:scale-[0.98]"
                 >
                   {o.cta}

@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import WorkIndex from "@/components/WorkIndex";
+import FleetProof from "@/components/FleetProof";
 import Pricing from "@/components/Pricing";
 import FooterCTA from "@/components/FooterCTA";
 
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Marquee />
       <WorkIndex />
+      <FleetProof />
       <Pricing />
       <FooterCTA />
     </main>

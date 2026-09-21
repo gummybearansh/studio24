@@ -4,6 +4,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { track } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,6 +86,7 @@ export default function Hero() {
         <div className="hero-fade mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
             href="#work"
+            onClick={() => track("cta_click", { cta: "see_live_demos", location: "hero" })}
             className="group flex items-center gap-4 rounded-full bg-[#1C1A17] py-2 pl-8 pr-2 text-sm font-bold text-[#FAF6EF] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#2F4A3C] active:scale-[0.98]"
           >
             See live demos
@@ -96,6 +98,7 @@ export default function Hero() {
             href="https://cal.com/ansh-lachhwani"
             target="_blank"
             rel="noreferrer"
+            onClick={() => track("cal_book_click", { location: "hero" })}
             className="group flex items-center gap-4 rounded-full border border-black/15 bg-white/70 py-2 pl-8 pr-2 text-sm font-bold text-[#1C1A17] transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-[#2F4A3C]/60 hover:text-[#2F4A3C] active:scale-[0.98]"
           >
             Book a call

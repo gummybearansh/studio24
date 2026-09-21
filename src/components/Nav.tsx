@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/analytics";
 
 const links = [
   { label: "Work", href: "#work" },
@@ -48,6 +49,7 @@ export default function Nav() {
           href="https://cal.com/ansh-lachhwani"
           target="_blank"
           rel="noreferrer"
+          onClick={() => track("cal_book_click", { location: "nav" })}
           className="group flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1C1A17] transition-colors duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-[#2F4A3C] justify-self-end sm:text-[13px] sm:tracking-[0.22em]"
         >
           <span className="border-b border-[#1C1A17]/30 pb-0.5 group-hover:border-[#2F4A3C]">

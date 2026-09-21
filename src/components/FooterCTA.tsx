@@ -4,14 +4,15 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { track } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const sites = [
-  { name: "Cluck Royale", href: "https://cluck-royale-vert.vercel.app/" },
-  { name: "Pizza Palace", href: "https://pizza-palace-liart.vercel.app/" },
-  { name: "Swastik Jewels", href: "https://swastik-jewels.vercel.app/" },
-  { name: "Chinese Heaven", href: "https://chinese-heaven.vercel.app/" },
+  { name: "Cluck Royale", slug: "cluck-royale", href: "https://cluck-royale-vert.vercel.app/" },
+  { name: "Pizza Palace", slug: "pizza-palace", href: "https://pizza-palace-liart.vercel.app/" },
+  { name: "Swastik Jewels", slug: "swastik-jewels", href: "https://swastik-jewels.vercel.app/" },
+  { name: "Chinese Heaven", slug: "chinese-heaven", href: "https://chinese-heaven.vercel.app/" },
 ];
 
 function CalMark() {
@@ -74,6 +75,7 @@ export default function FooterCTA() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    track("lead_form_submit", { location: "footer" });
     const subject = encodeURIComponent(`Studio24 project - ${name || "new inquiry"}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nProject:\n${brief}`);
     window.location.href = `mailto:ansh@ship24.tech?subject=${subject}&body=${body}`;
@@ -92,7 +94,11 @@ export default function FooterCTA() {
 
           <div className="foot-grid mt-12 grid grid-cols-1 items-stretch gap-10 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col">
-              <a href="mailto:ansh@ship24.tech" className="foot-card group block">
+              <a
+                href="mailto:ansh@ship24.tech"
+                onClick={() => track("cta_click", { cta: "email", location: "footer" })}
+                className="foot-card group block"
+              >
                 <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#1C1A17]/40">Email</p>
                 <p className="font-clash mt-2 text-3xl font-semibold tracking-tight text-[#1C1A17] transition-colors duration-500 group-hover:text-[#2F4A3C] [overflow-wrap:anywhere] md:text-4xl">
                   ansh@ship24.tech
@@ -106,6 +112,7 @@ export default function FooterCTA() {
                 href="https://cal.com/ansh-lachhwani"
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => track("cal_book_click", { location: "footer" })}
                 className="foot-card group block"
               >
                 <CalMark />
@@ -199,6 +206,7 @@ export default function FooterCTA() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => track("portfolio_outbound_click", { site: s.slug, location: "footer" })}
                 className="foot-card group flex items-center justify-between rounded-2xl bg-white px-6 py-5 ring-1 ring-black/10 transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] hover:ring-[#2F4A3C]/30 hover:shadow-[0_20px_50px_-30px_rgba(47,74,60,0.35)]"
               >
                 <span className="text-sm font-semibold text-[#1C1A17]/70 group-hover:text-[#1C1A17]">

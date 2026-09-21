@@ -5,14 +5,17 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { track } from "@/lib/analytics";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type Project = {
   index: string;
   name: string;
+  slug: string;
   category: string;
   detail: string;
+  tracks: string;
   src: string;
   href: string;
 };
@@ -21,32 +24,40 @@ const projects: Project[] = [
   {
     index: "01",
     name: "Cluck Royale",
+    slug: "cluck-royale",
     category: "Fried chicken / Commerce",
     detail: "Playful ordering flow, sauce system, built for cravings.",
+    tracks: "Order intent, phone, sauce picks, scroll depth",
     src: "/work-cluck-royale.jpg",
     href: "https://cluck-royale-vert.vercel.app/",
   },
   {
     index: "02",
     name: "Pizza Palace",
+    slug: "pizza-palace",
     category: "Restaurant / Cinematic",
     detail: "Wood-fired story, menu engineering, order-first layout.",
+    tracks: "Pickup calls, visit intent, scroll depth",
     src: "/work-pizza-palace.png",
     href: "https://pizza-palace-liart.vercel.app/",
   },
   {
     index: "03",
     name: "Swastik Jewels",
+    slug: "swastik-jewels",
     category: "Jewellery / Luxury",
     detail: "Editorial product system, high-trust luxury pacing.",
+    tracks: "Add to bag, newsletter, appointment, scroll depth",
     src: "/work-swastik.jpg",
     href: "https://swastik-jewels.vercel.app/",
   },
   {
     index: "04",
     name: "Chinese Heaven",
+    slug: "chinese-heaven",
     category: "Restaurant / Heritage",
     detail: "Heritage craft, dish-led storytelling, reservations.",
+    tracks: "Reservation request, Resy, phone, scroll depth",
     src: "/work-chinese-heaven.jpg",
     href: "https://chinese-heaven.vercel.app/",
   },
@@ -69,6 +80,7 @@ function Panel({ p, active }: { p: Project; active: string | null }) {
       href={p.href}
       target="_blank"
       rel="noreferrer"
+      onClick={() => track("portfolio_outbound_click", { site: p.slug, location: "work_index" })}
       onMouseMove={onMove}
       onMouseEnter={(e) => {
         ref.current?.classList.add("is-active");
@@ -114,6 +126,9 @@ function Panel({ p, active }: { p: Project; active: string | null }) {
           <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#2F4A3C]">{p.category}</p>
           <h3 className="font-clash mt-2 text-3xl font-semibold tracking-tight text-[#1C1A17] md:text-4xl">{p.name}</h3>
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#1C1A17]/60">{p.detail}</p>
+          <p className="mt-3 max-w-sm font-mono text-[11px] leading-relaxed tracking-wide text-[#2F4A3C]/80">
+            Tracking: {p.tracks}
+          </p>
         </div>
       </div>
 
